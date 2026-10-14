@@ -4,6 +4,9 @@
 
 打开方式：双击 `index.html`（或本地起个静态服务器）。
 
+**线上地址**：https://123xzw999.github.io/kaoyan-math/
+**仓库**：https://github.com/123xzw999/kaoyan-math
+
 ---
 
 ## 一、功能一览
