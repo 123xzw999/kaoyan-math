@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>考研数学拿高分 · 公式 · 结论 · 题库 · 真题</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%234e9c74'/><text x='16' y='24' font-size='21' text-anchor='middle' fill='%2306140d' font-family='KaiTi,SimSun,serif'>数</text></svg>">
+<link rel="stylesheet" href="assets/js/lib/katex.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ============ 背景层 ============ -->
+<div class="bg-layer">
+  <div class="bg-photo"></div>
+  <div class="bg-veil"></div>
+  <div class="bg-leaves" id="bgLeaves"></div>
+</div>
+
+<!-- ============ 顶栏 ============ -->
+<header class="topbar" id="topbar">
+  <div class="brand" data-nav="home">
+    <span class="brand-seal">数</span>
+    <span class="brand-text">考研数学拿高分</span>
+  </div>
+  <nav class="nav" id="mainNav">
+    <button class="nav-item active" data-nav="home">首页</button>
+    <button class="nav-item" data-nav="formulas">公式库</button>
+    <button class="nav-item" data-nav="conclusions">二级结论</button>
+    <button class="nav-item" data-nav="bank">题库刷题</button>
+    <button class="nav-item" data-nav="exams">历年真题</button>
+    <button class="nav-item" data-nav="guide">备考指南</button>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
+</header>
+
+<main id="main">
+
+  <!-- ============ 首页 ============ -->
+  <section class="view active" id="view-home">
+    <div class="hero" id="hero">
+      <div class="hero-slides" id="heroSlides"></div>
+      <div class="hero-dots" id="heroDots"></div>
+      <div class="hero-hint">← 左右滑动 / 拖拽切换 →</div>
+      <div class="hero-scroll" data-nav="formulas">
+        <span>开始学习</span><i></i>
+      </div>
+    </div>
+    <div class="home-stats" id="homeStats"></div>
+    <div class="home-entries" id="homeEntries"></div>
+  </section>
+
+  <!-- ============ 公式库 ============ -->
+  <section class="view" id="view-formulas">
+    <div class="page-head">
+      <h1>公式与结论全库</h1>
+      <p>高等数学 · 线性代数 · 概率论与数理统计 —— 按章节编排，含考点提示与秒杀结论。</p>
+    </div>
+    <div class="split">
+      <aside class="side" id="formulaSide">
+        <div class="side-search">
+          <input type="text" id="formulaSearch" placeholder="搜索公式关键词，如 泰勒 / 格林 / 特征值">
+        </div>
+        <div class="side-tree" id="formulaTree"></div>
+      </aside>
+      <div class="content" id="formulaContent">
+        <div class="placeholder">从左侧选择一个章节开始阅读</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 二级结论 ============ -->
+  <section class="view" id="view-conclusions">
+    <div class="page-head">
+      <h1>二级结论 · 多级结论</h1>
+      <p>考场上能直接省下一半时间的东西。标注 <b class="mk">※</b> 的为高频秒杀结论。</p>
+    </div>
+    <div class="concl-filter" id="conclFilter"></div>
+    <div class="concl-wrap" id="conclWrap"></div>
+  </section>
+
+  <!-- ============ 题库 ============ -->
+  <section class="view" id="view-bank">
+    <div class="page-head">
+      <h1>题库刷题</h1>
+      <p>按科目与章节筛选，客观题自动判分，主观题可手写作答并自评。</p>
+    </div>
+    <div class="bank-toolbar">
+      <div class="seg" id="bankSubject"></div>
+      <div class="seg" id="bankChapter"></div>
+      <div class="bank-actions">
+        <button class="btn ghost" id="bankShuffle">随机顺序</button>
+        <button class="btn ghost" id="bankReset">重做本卷</button>
+        <button class="btn primary" id="bankGrade">交卷判分</button>
+      </div>
+    </div>
+    <div class="bank-progress" id="bankProgress"></div>
+    <div class="bank-list" id="bankList"></div>
+    <div class="bank-result" id="bankResult"></div>
+  </section>
+
+  <!-- ============ 真题 ============ -->
+  <section class="view" id="view-exams">
+    <div class="page-head">
+      <h1>历年真题</h1>
+      <p>全国硕士研究生招生考试数学（一/二/三）真题。考研为<b>全国统考</b>，不分省份，故按<b>年份 × 科目</b>编排。</p>
+    </div>
+    <div class="exam-toolbar">
+      <div class="seg" id="examYear"></div>
+      <div class="seg" id="examSubject"></div>
+    </div>
+    <div class="exam-note" id="examNote"></div>
+    <div class="exam-paper" id="examPaper"></div>
+  </section>
+
+  <!-- ============ 备考指南 ============ -->
+  <section class="view" id="view-guide">
+    <div class="page-head">
+      <h1>备考指南</h1>
+      <p>零基础怎么起步、三科怎么分工、卷面怎么分配时间。</p>
+    </div>
+    <div class="guide-wrap" id="guideWrap"></div>
+  </section>
+
+</main>
+
+<!-- ============ 手写答题板 ============ -->
+<div class="pad-mask" id="padMask">
+  <div class="pad-sheet" id="padSheet">
+    <div class="pad-top">
+      <span class="pad-title" id="padTitle">开始答题</span>
+      <button class="pad-close" id="padClose">✕</button>
+    </div>
+    <div class="pad-body">
+      <div class="pad-watermark">宁静致远</div>
+      <canvas id="padCanvas"></canvas>
+    </div>
+    <div class="pad-tools" id="padTools">
+      <div class="tool-group">
+        <span class="tool-label">笔</span>
+        <button class="tool-btn pen active" data-tool="pen">✎</button>
+        <button class="tool-btn" data-tool="eraser">⌫</button>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">粗细</span>
+        <button class="dot" data-size="2"></button>
+        <button class="dot active" data-size="3"></button>
+        <button class="dot" data-size="5"></button>
+        <button class="dot" data-size="8"></button>
+      </div>
+      <div class="tool-group">
+        <span class="tool-label">颜色</span>
+        <button class="swatch active" data-color="#12352a" style="--c:#12352a"></button>
+        <button class="swatch" data-color="#0b1f16" style="--c:#0b1f16"></button>
+        <button class="swatch" data-color="#8b2f2f" style="--c:#8b2f2f"></button>
+        <button class="swatch" data-color="#1d4f7c" style="--c:#1d4f7c"></button>
+        <button class="swatch" data-color="#b8860b" style="--c:#b8860b"></button>
+      </div>
+      <div class="tool-group grow">
+        <button class="btn ghost small" id="padUndo">撤销</button>
+        <button class="btn ghost small" id="padClear">清空</button>
+        <button class="btn primary small" id="padSave">存为图片</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 解析弹层 ============ -->
+<div class="sol-mask" id="solMask">
+  <div class="sol-box" id="solBox"></div>
+</div>
+
+<script src="assets/js/lib/katex.min.js"></script>
+<script src="assets/js/lib/marked.min.js"></script>
+<script src="assets/js/data/formulas.js"></script>
+<script src="assets/js/data/conclusions.js"></script>
+<script src="assets/js/data/bank-gaoshu.js"></script>
+<script src="assets/js/data/bank-xiandai.js"></script>
+<script src="assets/js/data/bank-gailv.js"></script>
+<script src="assets/js/data/bank.js"></script>
+<script src="assets/js/data/exams.js"></script>
+<script src="assets/js/data/guide.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
